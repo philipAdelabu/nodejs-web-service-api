@@ -42,10 +42,10 @@ router.post('/products/',
 
  
 router.put('/products/:productId', [
-  body('productName').notEmpty().withMessage('Product Name is required'),
-  body('price').isNumeric().withMessage('Price is required'),
-  body('description').notEmpty(),
-  body('category').notEmpty().withMessage('Category name is required'),
+  body('productName').optional().notEmpty().withMessage('Product Name is required'),
+  body('price').optional().isNumeric().withMessage('Price is required'),
+  body('description').optional().notEmpty(),
+  body('category').optional().notEmpty().withMessage('Category name is required'),
   body('subCategory').optional(),
   body('ownerName').notEmpty().withMessage('Owner name is required'),
   body('ownerEmail').optional().isEmail().withMessage('Valid email is required'),
