@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://cse341-api-7rz2.onrender.com"
+      "url": "https://nodejs-web-service-api.onrender.com"
     }
   ],
   "paths": {
