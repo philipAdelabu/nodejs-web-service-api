@@ -36,24 +36,13 @@ router.post('/products/',
   body('subCategory').optional(),
   body('ownerName').notEmpty().withMessage('Owner name is required'),
   body('ownerEmail').optional().isEmail().withMessage('Valid email is required'),
-  body('ownerName').notEmpty(),
+  body('ownerPhone').optional().notEmpty(),
   body('isActive').optional().isBoolean()
 ],ProductController.createProduct);
 
  
-router.put('/products/:productId', [
-  body('productName').optional().notEmpty().withMessage('Product Name is required'),
-  body('price').optional().isNumeric().withMessage('Price is required'),
-  body('description').optional().notEmpty(),
-  body('category').optional().notEmpty().withMessage('Category name is required'),
-  body('subCategory').optional(),
-  body('ownerName').optional().notEmpty().withMessage('Owner name is required'),
-  body('ownerEmail').optional().isEmail().withMessage('Valid email is required'),
-  body('ownerName').notEmpty(),
-  body('isActive').optional().isBoolean()
-],
-
- /*
+router.put('/products/:productId',
+    /*
     #swagger.summary = 'Update an existing product '
   
     #swagger.requestBody = {
@@ -65,8 +54,17 @@ router.put('/products/:productId', [
       }
     }
   */
-
-ProductController.updateProduct);
+   [
+  body('productName').optional().notEmpty(),
+  body('price').optional().isNumeric(),
+  body('description').optional().notEmpty(),
+  body('category').optional().notEmpty(),
+  body('subCategory').optional(),
+  body('ownerName').optional().notEmpty(),
+  body('ownerEmail').optional().isEmail(),
+  body('ownerPhone').optional().notEmpty(),
+  body('isActive').optional().isBoolean()
+],  ProductController.updateProduct);
 
 // delete contact data
 router.delete('/products/:productId', [

@@ -24,7 +24,7 @@ class ProductController {
         if(!errors.isEmpty()){
             return sendError(res, 'Validation error', 400, errors.array());
         }
-        
+
         try{
            const data = req.body;
            const result = await ProductService.createProduct(data);
@@ -48,7 +48,7 @@ class ProductController {
 
   
     static async updateProduct(req, res, next){
-            const errors = validationResult(req);
+        const errors = validationResult(req);
         if(!errors.isEmpty()){
             return sendError(res, 'Validation error', 400, errors.array());
         }
