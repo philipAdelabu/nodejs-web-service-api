@@ -16,7 +16,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
 app.use(cors({
   origin: `${process.env.NODE_ENV === 'development' ? process.env.SWAGGER_HOST_LOCAL : process.env.SWAGGER_HOST}`,
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
@@ -26,13 +25,11 @@ app.use(cors({
 
 const swaggerFile = await readFile("./swagger-output.json", "utf-8"); 
 
-
 // Swagger UI setup - This should be early in your middleware stack
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(JSON.parse(swaggerFile), {
   customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: "CSE341 API Documentation"
+  customSiteTitle: "CSE341 Product API Documentation"
 }));    
-
 
 
 app.use(router);

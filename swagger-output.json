@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://cse341-api-7rz2.onrender.com"
+      "url": "http://localhost:8080"
     }
   ],
   "paths": {
@@ -15,23 +15,90 @@
       "get": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/professional": {
+    "/products": {
       "get": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "/contact": {
+    "/products/{productId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing product ",
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdate"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/": {
       "post": {
         "summary": "Create a new user",
         "description": "",
@@ -45,88 +112,9 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ContactCreate"
+                "$ref": "#/components/schemas/ProductCreate"
               }
             }
-          }
-        }
-      }
-    },
-    "/contact/{contactId}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/contacts": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/contacts/{contactId}": {
-      "put": {
-        "summary": "Update an existing user",
-        "description": "",
-        "parameters": [
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactUpdate"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
@@ -134,7 +122,7 @@
   },
   "components": {
     "schemas": {
-      "ContactCreate": {
+      "ProductCreate": {
         "type": "object",
         "properties": {
           "type": {
@@ -144,7 +132,7 @@
           "properties": {
             "type": "object",
             "properties": {
-              "firstName": {
+              "productName": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -153,11 +141,11 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "Steven"
+                    "example": "Laptop CF-34"
                   }
                 }
               },
-              "lastName": {
+              "description": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -166,11 +154,63 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "Tom"
+                    "example": "A rugged System"
                   }
                 }
               },
-              "email": {
+              "price": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "number"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "4000.00"
+                  }
+                }
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "PC"
+                  }
+                }
+              },
+              "subCategory": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Laptop"
+                  }
+                }
+              },
+              "ownerName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "John Doe"
+                  }
+                }
+              },
+              "ownerEmail": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -187,20 +227,7 @@
                   }
                 }
               },
-              "favoriteColor": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "red"
-                  }
-                }
-              },
-              "birthday": {
+              "ownerPhone": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -209,11 +236,24 @@
                   },
                   "format": {
                     "type": "string",
-                    "example": "date"
+                    "example": "phone"
                   },
                   "example": {
                     "type": "string",
-                    "example": "1990-02-10"
+                    "example": "+45-080-93894"
+                  }
+                }
+              },
+              "isActive": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "boolean"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "true"
                   }
                 }
               }
@@ -222,9 +262,9 @@
           "required": {
             "type": "array",
             "example": [
-              "firstName",
-              "lastName",
-              "email"
+              "name",
+              "price",
+              "category"
             ],
             "items": {
               "type": "string"
@@ -232,7 +272,7 @@
           }
         }
       },
-      "ContactUpdate": {
+      "ProductUpdate": {
         "type": "object",
         "properties": {
           "type": {
@@ -242,7 +282,7 @@
           "properties": {
             "type": "object",
             "properties": {
-              "firstName": {
+              "productName": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -251,11 +291,11 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "Steven"
+                    "example": "Laptop CF-34"
                   }
                 }
               },
-              "lastName": {
+              "description": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -264,11 +304,63 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "Tom"
+                    "example": "A rugged System"
                   }
                 }
               },
-              "email": {
+              "price": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "number"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "4000.00"
+                  }
+                }
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "PC"
+                  }
+                }
+              },
+              "subCategory": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Laptop"
+                  }
+                }
+              },
+              "ownerName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "John Doe"
+                  }
+                }
+              },
+              "ownerEmail": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -285,20 +377,7 @@
                   }
                 }
               },
-              "favoriteColor": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "blue"
-                  }
-                }
-              },
-              "birthday": {
+              "ownerPhone": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -307,11 +386,24 @@
                   },
                   "format": {
                     "type": "string",
-                    "example": "date"
+                    "example": "phone"
                   },
                   "example": {
                     "type": "string",
-                    "example": "1990-02-10"
+                    "example": "+45-080-93894"
+                  }
+                }
+              },
+              "isActive": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "boolean"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "true"
                   }
                 }
               }

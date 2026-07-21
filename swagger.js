@@ -21,25 +21,33 @@ const doc = {
 
   components: {
     schemas: {
-      ContactCreate: {
+      ProductCreate: {
         type: "object",
         properties: {
-          firstName: { type: "string", example: "Steven" },
-          lastName: { type: "string", example: "Tom" },
-          email: { type: "string", format: "email", example: "tom@gmail.com" },
-          favoriteColor: { type: "string", example: "red" },
-          birthday: { type: "string", format: "date", example: "1990-02-10" }
+          productName: { type: "string", example: "Laptop CF-34" },
+          description: { type: "string", example: "A rugged System" },
+          price: { type: "number", example: "4000.00" },
+          category: { type: "string", example: "PC" },
+          subCategory: { type: "string", example: "Laptop"  },
+          ownerName: {type: "string", example: "John Doe" },
+          ownerEmail: { type: "string", format: "email", example: "tom@gmail.com" },
+          ownerPhone: {type: "string", format:"phone", example: "+45-080-93894"},
+          isActive: { type: "boolean", example: "true" }
         },
-        required: ["firstName", "lastName", "email"]
+        required: ["name", "price", "category"]
       },
-      ContactUpdate: {
+      ProductUpdate: {
         type: "object",
         properties: {
-          firstName: { type: "string", example: "Steven" },
-          lastName: { type: "string", example: "Tom" },
-          email: { type: "string", format: "email", example: "tom@gmail.com" },
-          favoriteColor: { type: "string", example: "blue" },
-          birthday: { type: "string", format: "date", example: "1990-02-10" }
+           productName: { type: "string", example: "Laptop CF-34" },
+          description: { type: "string", example: "A rugged System" },
+          price: { type: "number", example: "4000.00" },
+          category: { type: "string", example: "PC" },
+          subCategory: { type: "string", example: "Laptop"  },
+          ownerName: {type: "string", example: "John Doe" },
+          ownerEmail: { type: "string", format: "email", example: "tom@gmail.com" },
+          ownerPhone: {type: "string", format:"phone", example: "+45-080-93894"},
+          isActive: { type: "boolean", example: "true" }
         }
       }
     }
