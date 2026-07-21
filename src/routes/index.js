@@ -47,7 +47,7 @@ router.put('/products/:productId', [
   body('description').optional().notEmpty(),
   body('category').optional().notEmpty().withMessage('Category name is required'),
   body('subCategory').optional(),
-  body('ownerName').notEmpty().withMessage('Owner name is required'),
+  body('ownerName').optional().notEmpty().withMessage('Owner name is required'),
   body('ownerEmail').optional().isEmail().withMessage('Valid email is required'),
   body('ownerName').notEmpty(),
   body('isActive').optional().isBoolean()
