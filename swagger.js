@@ -21,6 +21,30 @@ const doc = {
 
   components: {
     schemas: {
+
+        ContactCreate: {
+        type: "object",
+        properties: {
+          firstName: { type: "string", example: "Steven" },
+          lastName: { type: "string", example: "Tom" },
+          email: { type: "string", format: "email", example: "tom@gmail.com" },
+          favoriteColor: { type: "string", example: "red" },
+          birthday: { type: "string", format: "date", example: "1990-02-10" },
+          userId: {type: 'string'}
+        },
+        required: ["firstName", "lastName", "email"]
+      },
+      ContactUpdate: {
+        type: "object",
+        properties: {
+          firstName: { type: "string", example: "Steven" },
+          lastName: { type: "string", example: "Tom" },
+          email: { type: "string", format: "email", example: "tom@gmail.com" },
+          favoriteColor: { type: "string", example: "blue" },
+          birthday: { type: "string", format: "date", example: "1990-02-10" }
+        }
+      },
+
       ProductCreate: {
         type: "object",
         properties: {
@@ -36,6 +60,7 @@ const doc = {
         },
         required: ["name", "price", "category"]
       },
+
       ProductUpdate: {
         type: "object",
         properties: {
@@ -49,7 +74,29 @@ const doc = {
           ownerPhone: {type: "string", format:"phone", example: "+45-080-93894"},
           isActive: { type: "boolean", example: "true" }
         }
-      }
+      },
+
+        UserCreate: {
+        type: "object",
+        properties: {
+          username: { type: "string", example: "user@example.com" },
+          isActive: { type: "boolean", example: "true" }
+        },
+        required: ["username"]
+      },
+
+        UserUpdate: {
+        type: "object",
+        properties: {
+          username: { type: "string", example: "user@example.com" },
+          isActive: { type: "boolean", example: "true" }
+        },
+  
+      },
+
+
+
+
     }
   }
 };

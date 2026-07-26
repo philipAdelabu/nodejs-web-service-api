@@ -1,29 +1,24 @@
 import Contact from '../models/contact.js';
+import User from  '../models/user.js';
+import UserService from './user.service.js';
 import { readFile } from "fs/promises";
 
 
-class ApiService {
+
+class ContactService {
      constructor(){
 
      }
 
-     static async getProfessional(){
-        try{
-        const data = await readFile(new URL("../database/user.json", import.meta.url));
-        const users = JSON.parse(data);
-        return users;
-        }catch(error){
-            throw error;
-        }
-     }
-
-     static async createContact(data = {}){
-            if(!data){
-                console.log("The data is empty");
-                return null;
-            }
+    
+     static async createContact(userId, data = {}){
+         if(!data) throw new Error('Bad request body');
            try{
-            
+            let user;
+               user = await UserService.getUserById(userId);
+            if(!user) 
+                user = await UserService.createUser({username: data.email});
+            data.userId = user._id;
             const result = await Contact.create(data);
             return result;
            }catch(error){
@@ -74,4 +69,4 @@ class ApiService {
     
 }
 
-export default ApiService;
+export default ContactService;
