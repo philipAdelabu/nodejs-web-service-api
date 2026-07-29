@@ -22,18 +22,19 @@ class UserController {
   }
 
     static async getUserById(req, res, next){
-      const errors = validationResult(req);
-    if(!errors.isEmpty()){
-       return sendError(res, 'Validation error', 400, errors.array());
-    }
-      try{
-        const user = UserService.getUserById(req.params.userId);
-        sendSuccess(res, user, 'User retrieeved successfully');
-      }catch(error){
-        sendError(res, error.message || 'Fail to retrieve user', error.statusCode || 500);
-        next(error);
+          const errors = validationResult(req);
+      if(!errors.isEmpty()){
+        sendError(res, 'Validation error', 400, errors.array());
       }
-  }
+        try{
+        const userId = req.params.userId
+           const result = await UserService.getUserById(userId);
+           sendSuccess(res, result, 'The operation was successful');
+        }catch(error){
+            sendError(res, error.message || 'Failed to retrieve the user', error.statusCode || 500);
+            next(error);
+        }
+    }
 
   static async deleteUser(req, res, next){
       const errors = validationResult(req);
@@ -42,23 +43,24 @@ class UserController {
       }
       try{
         const user = UserService.deleteUserById(req.params.userId);
-        sendSuccess(res, user, 'User deleted successfully', 201);
+        sendSuccess(res, user, 'User deleted successfully');
       }catch(error){
         sendError(res, error.message || 'Fail to delete user', error.statusCode || 500);
         next(error);
       }
   }
 
-   static async getAllUsers(req, res, next){
- 
-      try{
-        const users = UserService.getAllUsers();
-        sendSuccess(res, users, 'All users retrieved successfully', 200);
-      }catch(error){
-        sendError(res, error.message || 'Fail to delete user', error.statusCode || 500);
-        next(error);
+
+     static async getAllUsers(req, res, next) { 
+  
+          try {
+              const result = await UserService.getAllUsers()
+               sendSuccess(res, result, 'Users successfully retrieved');
+          } catch (error) {
+              sendError(res, error.message || 'Failed to retrieve all users', error.statusCode || 500);
+              next(error);
+          }
       }
-  }
 
    
 

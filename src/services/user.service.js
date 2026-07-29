@@ -31,25 +31,25 @@ class UserService {
 
     
 
-     static async getAllUsers(){
-         try{
-            const users = await User.find();
-            return users;
-         }catch(error){
-            throw error;
-         }
-     }
+        static async getAllUsers(){
+            try{
+                const result = await User.find();
+                return result;
+            }catch(error){
+                throw error;
+            }   
+        }
 
 
 
-     static async getUserById(userId){
-         try{
-            const result = await User.findOne({_id: userId });
+    static async getUserById(userId){
+        try{
+            const result = await User.findOne({_id: userId});
             return result;
-         }catch(error){
+        }catch(error){
             throw error;
-         }
-     }
+        } 
+    }
 
 
      static async updateUserById(userId, data){
