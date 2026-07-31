@@ -12,10 +12,11 @@ const doc = {
   },
 
   servers: [
-    {
-      url: process.env.NODE_ENV === "development"
-        ? process.env.SWAGGER_HOST_LOCAL
-        : process.env.SWAGGER_HOST
+     {
+      "url": "https://nodejs-web-service-api.onrender.com"
+    },
+     {
+      "url": "http://localhost:8080"
     }
   ],
 
