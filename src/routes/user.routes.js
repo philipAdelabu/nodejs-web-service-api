@@ -18,7 +18,9 @@ router.post('/user',
     }
   */
      [
-  body('username').notEmpty().isString(),
+  body('email').notEmpty().isString(),
+  body('password').notEmpty(),
+  body('displayName').optional(),
   body('isActive').optional().isBoolean(),
 ], UserController.createUser );
 
@@ -35,7 +37,8 @@ router.put('/user',
     }
   */
      [
- body('username').notEmpty().isString(),
+  body('password').optional(),
+  body('displayName').optional(),
   body('isActive').optional().isBoolean(),
 ], UserController.createUser );
 

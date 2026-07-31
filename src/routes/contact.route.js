@@ -20,6 +20,7 @@ router.post('/contact',
   body('firstName').notEmpty().withMessage('Name is required'),
   body('lastName').notEmpty().withMessage('Last name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
+  body('phone').optional(),
   body('favoriteColor').notEmpty().withMessage('Favorite color is required'),
   body('birthday').isDate().withMessage('Valid date is required')
 ],  ContactController.createContact);
@@ -44,9 +45,10 @@ router.put('/contact/:contactId', [
     body('firstName').optional().notEmpty().withMessage('Name is required'),
     body('lastName').optional().notEmpty().withMessage('Last name is required'),
     body('favoriteColor').optional().notEmpty().withMessage('Favorite color is required'),
-    body('birthday').optional().isDate().withMessage('Valid date is required')
+    body('birthday').optional().isDate().withMessage('Valid date is required'),
+    body('phone').optional(),
 ],
-
+ 
  /*
     #swagger.summary = 'Update an existing contact'
   

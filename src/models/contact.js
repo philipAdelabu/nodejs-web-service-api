@@ -18,6 +18,8 @@ const contactSchema = new mongoose.Schema({
         trim: true,
     },
 
+     phone: { type: String },
+
     favoriteColor: {
          type: String,
          trim: true,
@@ -29,7 +31,7 @@ const contactSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     }, 
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Contact', require: true, unique: true}, 
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Contact', unique: true}, 
 });
 
 

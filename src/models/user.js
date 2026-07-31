@@ -5,7 +5,7 @@ import { orderSchema } from './order.js';
 import { productSchema } from './product.js';
 import { profileSchema } from './profile.js';
 
-
+     
 const userSchema = new mongoose.Schema({
 
      email: {
@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
       require: true,
       trim: true,
     },
+    
    password: { type: String },
    displayName: { type: String},
    avatar: { type: String },

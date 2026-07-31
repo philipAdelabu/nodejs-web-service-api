@@ -11,14 +11,9 @@ class ContactService {
      }
 
     
-     static async createContact(userId, data = {}){
+     static async createContact(data){
          if(!data) throw new Error('Bad request body');
            try{
-            let user;
-               user = await UserService.getUserById(userId);
-            if(!user) 
-                user = await UserService.createUser({username: data.email});
-            data.userId = user._id;
             const result = await Contact.create(data);
             return result;
            }catch(error){

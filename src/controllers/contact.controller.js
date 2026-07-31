@@ -6,16 +6,6 @@ class ContactController {
     //
   }
 
-    static async getProfessional(req, res, next) { 
-
-        try {
-            const result = await ContactService.getProfessional()
-             return res.json(result[0]);
-        } catch (error) {
-            sendError(res, error.message || 'Failed to retrieve professional', error.statusCode || 500);
-            next(error);
-        }
-    } 
     
     static async createContact(req, res, next){
         try{

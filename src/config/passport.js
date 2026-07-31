@@ -1,9 +1,11 @@
-const GitHubStrategy = require('passport-github2').Strategy;
-const LocalStrategy = require('passport-local').Strategy; 
-const bcrypt = require('bcrypt');
-const User = require('../models/user.js');
+import { GitHubStrategy: Strategy } from 'passport-github2';
+import { LocalStrategy } from 'passport-local'; 
+import bcrypt from 'bcrypt';
+import User from  '../models/user.js';
 
-export default function(){
+c
+
+function Passport (passport){
 
       passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID, 
@@ -29,7 +31,7 @@ export default function(){
                  user = await User.create({
                     githubId: profile.id,
                     displayName: profile.displayName || profile.username, 
-                    email: email.toLowerCase();
+                    email: email.toLowerCase(),
                     avatar: profile._json.avatar_url, 
                  })
               }
@@ -66,3 +68,6 @@ export default function(){
          }
       });
 };
+
+
+export default Passport;
