@@ -1,5 +1,6 @@
 import User from '../models/user.js';
 import bcrypt from 'bcrypt';
+import { sendSuccess, sendError } from '../utils/responseMessage.js';
 
 
 
@@ -27,8 +28,8 @@ class AuthController {
             if(err) return next(err);
             res.redirect('/');
         })
-       }catch(err){
-          res.status(500).send('Server Error');
+       }catch(error){
+           sendError(res, error.message || 'Failed to register user', error.statusCode || 500);
        }   
    }
 

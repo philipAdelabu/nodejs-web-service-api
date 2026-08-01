@@ -11,6 +11,7 @@ import authRouutes from './auth.routes.js';
 router.get('/', (req, res) => {
   if(req.isAuthenticated()) res.json( { name: 'cse341-api',
   message:'You are now logged In.', date: Date.now()});
+  else
   res.json({message: 'You are logged out.'});
 });
 

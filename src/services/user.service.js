@@ -52,7 +52,7 @@ class UserService {
     }
 
 
-     static async updateUserById(userId, data){
+     static async updateUser(userId, data){
         if(!data) throw new Error('Bad request body');
         try{
           const result = await User.findOneAndUpdate({_id: userId}, data, {new: true});

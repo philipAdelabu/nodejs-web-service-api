@@ -317,10 +317,30 @@
     },
     "/users/user/{userId}": {
       "put": {
+        "summary": "Update user by id",
         "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
           }
         }
       },
@@ -870,7 +890,7 @@
           "properties": {
             "type": "object",
             "properties": {
-              "username": {
+              "email": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -880,6 +900,32 @@
                   "example": {
                     "type": "string",
                     "example": "user@example.com"
+                  }
+                }
+              },
+              "displayName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "John Doe"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "password123"
                   }
                 }
               },
@@ -901,7 +947,8 @@
           "required": {
             "type": "array",
             "example": [
-              "username"
+              "email",
+              "password"
             ],
             "items": {
               "type": "string"
@@ -919,7 +966,7 @@
           "properties": {
             "type": "object",
             "properties": {
-              "username": {
+              "displayName": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -928,7 +975,20 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "user@example.com"
+                    "example": "John Doe"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "password123"
                   }
                 }
               },

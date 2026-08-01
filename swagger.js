@@ -80,8 +80,11 @@ const doc = {
         UserCreate: {
         type: "object",
         properties: {
-          email: { type: "string", example: "user@example.com" },
+           email: { type: "string", example: "user@example.com" },
+           displayName: { type: "string", example: "John Doe" },
           password: { type: "string", example: "password123" },
+          avatar: { type: "string", example: "https://example.com/avatar.jpg" },
+           githubId: { type: "string", example: "github123" },
           isActive: { type: "boolean", example: "true" }
         },
         required: ["email", "password"]
@@ -90,7 +93,8 @@ const doc = {
         UserUpdate: {
         type: "object",
         properties: {
-          email: { type: "string", example: "user@example.com" },
+          displayName: { type: "string", example: "John Doe" },
+           avatar: { type: "string", example: "https://example.com/avatar.jpg" },
           password: { type: "string", example: "password123" },
           isActive: { type: "boolean", example: "true" }
         },
