@@ -2,6 +2,7 @@ import express from 'express'
 const router = express.Router();
 import { body,  param, query, validationResult  } from 'express-validator';
 import ProductController from '../controllers/product.controller.js'
+import ensureAuthenticated from '../middleware/ensureAthenticated.js'; 
 
 
 
@@ -41,7 +42,7 @@ router.post('/product',
   body('ownerEmail').optional().isEmail().withMessage('Valid email is required'),
   body('ownerPhone').optional().notEmpty(),
   body('isActive').optional().isBoolean()
-],ProductController.createProduct);
+], ensureAuthenticated, ProductController.createProduct);
 
  
 router.put('/product/:productId',
@@ -66,7 +67,7 @@ router.put('/product/:productId',
   body('ownerEmail').optional().isEmail(),
   body('ownerPhone').optional().notEmpty(),
   body('isActive').optional().isBoolean()
-],  ProductController.updateProduct);
+], ensureAuthenticated, ProductController.updateProduct);
 
 // delete contact data
 router.delete('/product/:productId',
@@ -76,7 +77,7 @@ router.delete('/product/:productId',
     [
      
     param('productId').isMongoId().withMessage('Valid product ID is required')
-], ProductController.deleteProduct);
+], ensureAuthenticated,  ProductController.deleteProduct);
 
 
 

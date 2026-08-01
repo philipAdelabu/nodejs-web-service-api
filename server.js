@@ -10,13 +10,14 @@ import cors from 'cors';
 import session from 'express-session';
 import passport from 'passport';
 import flash from 'connect-flash';
-// import Passport from './src/config/passport.js';
+import Passport from './src/config/passport.js';
+import ensureAuthenticated from './src/middleware/ensureAthenticated.js'; 
 
 
 
 
 const app = express();
-//Passport(passport);
+Passport(passport);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -26,31 +27,14 @@ app.use(session({
   resave: false, 
   saveUninitialized: true,
 }));
-/*
+
 app.use(passport.initialize());
-app.use(passport.session());  */
+app.use(passport.session());  
 app.use(flash());
 
-// Global variables Middleware
-app.use((req, res, next) => {
-  res.locals.error = req.flash('error');  // buit-in passport error
-  res.locals.error_msg = req.flash('error_msg'); // custom manual regisration error
-  res.locals.success_msg = req.flash('success_msg');
-  next();
-});
-
-function ensureAuthenticated(req, res, next) {
-   if(req.isAuthenticated()) return next();
-   req.flash('error', 'Please log in to view that resource.');
-   res.redirect('/');
-}
 
 
-/*
 // -- monolith view -- 
-app.get('/', (req, res) => {
- if(req.isAuthenticated()) return 
-})  */
 
 app.use(cors({
   origin: `${process.env.NODE_ENV === 'development' ? process.env.SWAGGER_HOST_LOCAL : process.env.SWAGGER_HOST}`,

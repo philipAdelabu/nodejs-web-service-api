@@ -14,19 +14,18 @@ class AuthController {
         const { displayName, email, password } = req.body;
         const existingUser = await User.findOne({email: email.toLowerCase()});
         if(existingUser){
-            req.flash('error_msg', 'Email is already registered');
-            return res.redirect('/');
+            return res.json({message: 'Email is already registered', data: Date.now()});
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             displayName, 
             email: email.toLowerCase(), 
-            password: hashedPassword
+            password: hashedPassword,
         });
 
         req.login(newUser, (err) => {
             if(err) return next(err);
-            res.redirect('/dashboard');
+            res.redirect('/');
         })
        }catch(err){
           res.status(500).send('Server Error');

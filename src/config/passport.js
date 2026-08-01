@@ -1,9 +1,10 @@
-import { GitHubStrategy: Strategy } from 'passport-github2';
-import { LocalStrategy } from 'passport-local'; 
+import {Strategy as GitHubStrategy }  from 'passport-github2';
+import { Strategy as LocalStrategy } from 'passport-local'; 
 import bcrypt from 'bcrypt';
 import User from  '../models/user.js';
-
-c
+import dotenv from 'dotenv';
+dotenv.config();
+ 
 
 function Passport (passport){
 
@@ -14,11 +15,13 @@ function Passport (passport){
         scope: ['user:email'] // critical to ensure email access
       } , async (accessToken, refreshToken, profile, done) => {
          try {
-          const email = profile.emails && profile.emails[0] ? 
+          const proEmail = profile.emails && profile.emails[0] ? 
                        profile.emails[0] : null;
+          const email = proEmail.value;
            if(!email){
              return done(new Error('GitHub account must have a verified email address.'), null);
            }
+
            let user = await User.findOne({githubId: profile.id }) 
            if(!user){
              user = await User.findOne({email: email.toLowerCase()});
@@ -58,7 +61,7 @@ function Passport (passport){
          }
       }));
 
-      passport.serializeUser((user, done) => done(null, user.id));
+      passport.serializeUser((user, done) => done(null, user._id));
       passport.deserializeUser(async (id, done) => {
          try {
             const user = await User.findById(id);

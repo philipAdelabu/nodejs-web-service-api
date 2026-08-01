@@ -2,52 +2,51 @@ import express from 'express'
 const router = express.Router();
 import { body,  param, query, validationResult  } from 'express-validator';
 import UserController from '../controllers/user.controller.js';
+import ensureAuthenticated from '../middleware/ensureAthenticated.js'; 
 
-
-
-router.post('/user',
-         /*
-    #swagger.summary =  ' Create a new user '
-    #swagger.requestBody = {
-      required: true,
-      content: {
-        "application/json": {
-          schema: { $ref: "#/components/schemas/UserPost" }
+router.put('/user/:userId',
+    /*
+  #swagger.summary = 'Update existing user'
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            displayName: {
+              type: "string",
+              example: "John Doe
+            },
+            password: {
+              type: "string",
+              example: "mypassword123"
+            },
+             isActive: {
+              type: "boolean",
+              example: "true"
+            }
+          }
         }
       }
     }
-  */
-     [
-  body('email').notEmpty().isString(),
-  body('password').notEmpty(),
-  body('displayName').optional(),
-  body('isActive').optional().isBoolean(),
-], UserController.createUser );
+  }
+*/
 
-router.put('/user',
-         /*
-    #swagger.summary =  'Update existing user'
-    #swagger.requestBody = {
-      required: true,
-      content: {
-        "application/json": {
-          schema: { $ref: "#/components/schemas/UserUpdate" }
-        }
-      }
-    }
-  */
      [
+  param('userId').isMongoId(),
   body('password').optional(),
   body('displayName').optional(),
   body('isActive').optional().isBoolean(),
-], UserController.createUser );
+], ensureAuthenticated, UserController.createUser );
 
 
 router.delete('/user/:userId',  /*
           #swagger.summary = 'Delete user by id'
       */ [
   param('userId').isMongoId(),
-], UserController.deleteUser);
+],ensureAuthenticated,  UserController.deleteUser);
 
 router.get('/all',  /*
           #swagger.summary = 'Get all users'

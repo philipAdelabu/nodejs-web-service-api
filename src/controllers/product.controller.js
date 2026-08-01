@@ -11,7 +11,7 @@ class ProductController {
 
         try {
             const result = await ProductService.getAllProducts()
-             sendSuccess(res, result, 'Product successfully retrieved');
+            sendSuccess(res, result, 'Product successfully retrieved');
         } catch (error) {
             sendError(res, error.message || 'Failed to all Products', error.statusCode || 500);
             next(error);

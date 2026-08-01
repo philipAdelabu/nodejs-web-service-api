@@ -8,13 +8,16 @@ import authRouutes from './auth.routes.js';
 
 
 
-router.get('/', (req, res) => { res.json( { name: 'cse341-api',
-  message:'You are logged out', date: Date.now()})});
+router.get('/', (req, res) => {
+  if(req.isAuthenticated()) res.json( { name: 'cse341-api',
+  message:'You are now logged In.', date: Date.now()});
+  res.json({message: 'You are logged out.'});
+});
 
-/* router.use('/auth', authRouutes); */
+router.use('/auth', authRouutes); 
 router.use('/contacts', contactRoutes);
 router.use('/products', productRoutes);
-/* router.use('/users', userRoutes); */
+router.use('/users', userRoutes);
 
 export default router
 
