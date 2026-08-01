@@ -4,42 +4,27 @@ import { body,  param, query, validationResult  } from 'express-validator';
 import UserController from '../controllers/user.controller.js';
 import ensureAuthenticated from '../middleware/ensureAthenticated.js'; 
 
-router.put('/user/:userId',
-    /*
-  #swagger.summary = 'Update existing user'
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      "application/json": {
-        schema: {
-          type: "object",
-          required: ["email", "password"],
-          properties: {
-            displayName: {
-              type: "string",
-              example: "John Doe
-            },
-            password: {
-              type: "string",
-              example: "mypassword123"
-            },
-             isActive: {
-              type: "boolean",
-              example: "true"
-            }
-          }
-        }
-      }
-    }
-  }
-*/
-
-     [
+router.put('/user/:userId', [
   param('userId').isMongoId(),
   body('password').optional(),
   body('displayName').optional(),
   body('isActive').optional().isBoolean(),
-], ensureAuthenticated, UserController.createUser );
+], 
+ /*
+    #swagger.summary = 'Create new user'
+  
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: { $ref: "#/components/schemas/UserUpdate" }
+        }
+      }
+    }
+  *
+
+
+ensureAuthenticated, UserController.updateUser );
 
 
 router.delete('/user/:userId',  /*

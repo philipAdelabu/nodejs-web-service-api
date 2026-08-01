@@ -20,7 +20,21 @@ class UserController {
        next(error);
     }
   }
-
+  
+   static async updateUser(req, res, next){
+      
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+       return sendError(res, 'Validation error', 400, errors.array());
+    }
+    try{
+       const user = await UserService.updateUser(req.params.userId, req.body); 
+       sendSuccess(res, user, 'User updated successfully', 200);
+    }catch(error){
+       sendError(res, error.message || 'Fail to update user', error.statusCode || 500);
+       next(error);
+    }
+  }
     static async getUserById(req, res, next){
           const errors = validationResult(req);
       if(!errors.isEmpty()){

@@ -80,16 +80,18 @@ const doc = {
         UserCreate: {
         type: "object",
         properties: {
-          username: { type: "string", example: "user@example.com" },
+          email: { type: "string", example: "user@example.com" },
+          password: { type: "string", example: "password123" },
           isActive: { type: "boolean", example: "true" }
         },
-        required: ["username"]
+        required: ["email", "password"]
       },
 
         UserUpdate: {
         type: "object",
         properties: {
-          username: { type: "string", example: "user@example.com" },
+          email: { type: "string", example: "user@example.com" },
+          password: { type: "string", example: "password123" },
           isActive: { type: "boolean", example: "true" }
         },
   

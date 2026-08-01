@@ -317,24 +317,12 @@
     },
     "/users/user/{userId}": {
       "put": {
-        "summary": "Update existing user",
         "description": "",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
           }
-        },
-        "requestBody": {}
+        }
       },
       "delete": {
         "summary": "Delete user by id",
